@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APEXIS ENGINEERING — Club BTP & Génie Civil</title>
+  <meta name="description" content="APEXIS ENGINEERING : communauté d'étudiants et jeunes professionnels du BTP.">
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <style>
+    /* VARIABLES DE COULEURS */
+    :root {
+      --primary: #0B3C5D;
+      --primary-light: #145A8A;
+      --accent: #F2A900;
+      --bg-body: #FFFFFF;
+      --bg-section: #F4F6F8;
+      --bg-card: #FFFFFF;
+      --text-main: #222222;
+      --text-muted: #555555;
+      --border-color: #DDDDDD;
+      --shadow: 0 6px 20px rgba(0,0,0,0.08);
+      --radius: 12px;
+    }
+    body.dark-mode {
+      --primary: #4A90E2;
+      --primary-light: #357ABD;
+      --bg-body: #121212;
+      --bg-section: #1E1E1E;
+      --bg-card: #2A2A2A;
+      --text-main: #E0E0E0;
+      --text-muted: #AAAAAA;
+      --border-color: #444444;
+      --shadow: 0 6px 20px rgba(0,0,0,0.5);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: var(--text-main);
+      background: var(--bg-body);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+    .container { width: 90%; max-width: 1150px; margin: 0 auto; }
+
+    /* HEADER */
+    header {
+      position: sticky; top: 0;
+      background: var(--bg-body);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      z-index: 1000;
+      transition: background 0.3s;
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 15px 0; }
+    .logo {
+      font-weight: 800; font-size: 1.3rem;
+      color: var(--primary); letter-spacing: 0.5px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .logo img { height: 35px; width: auto; }
+    .logo span { color: var(--accent); }
+    .nav-right { display: flex; align-items: center; gap: 15px; }
+    .nav-links { display: flex; gap: 22px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--text-main);
+      font-weight: 500; font-size: 0.95rem; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .controls { display: flex; gap: 10px; }
+    .btn-ctrl {
+      background: var(--bg-section); border: 1px solid var(--border-color);
+      color: var(--text-main); padding: 6px 12px; border-radius: 20px;
+      cursor: pointer; font-weight: 600; font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    .btn-ctrl:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .menu-toggle { display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--primary); }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: #FFFFFF; padding: 80px 0 80px; text-align: center;
+    }
+    .hero-logo {
+      width: 140px; height: 140px; object-fit: contain;
+      margin-bottom: 20px; background: #fff; border-radius: 50%;
+      padding: 10px; box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); margin-bottom: 15px; line-height: 1.2; }
+    .hero p { font-size: 1.15rem; max-width: 750px; margin: 0 auto 20px; opacity: 0.95; }
+    .hero .slogan { font-style: italic; font-size: 1.1rem; margin-bottom: 35px; color: var(--accent); font-weight: 600; }
+    .btn {
+      display: inline-block; padding: 14px 32px; border-radius: 50px;
+      text-decoration: none; font-weight: 700; font-size: 1rem;
+      transition: transform 0.2s, box-shadow 0.2s; margin: 5px;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+    .btn-primary { background: var(--accent); color: #1A1A1A; }
+    .btn-outline { background: transparent; color: #FFFFFF; border: 2px solid #FFFFFF; }
+
+    /* SECTIONS */
+    section { padding: 80px 0; transition: background 0.3s; }
+    section:nth-child(even) { background: var(--bg-section); }
+    .section-title { text-align: center; font-size: 2rem; color: var(--primary); margin-bottom: 15px; }
+    .section-subtitle { text-align: center; max-width: 700px; margin: 0 auto 50px; color: var(--text-muted); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
+    .card {
+      background: var(--bg-card); padding: 30px 25px;
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      transition: transform 0.2s, background 0.3s;
+    }
+    .card h3 { color: var(--primary); margin-bottom: 10px; font-size: 1.2rem; }
+    .card p { color: var(--text-muted); font-size: 0.95rem; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
+    .tag { background: var(--primary); color: #FFFFFF; padding: 8px 18px; border-radius: 50px; font-size: 0.9rem; font-weight: 500; }
+
+    /* CARTES CLIQUABLES */
+    .card.clickable { cursor: pointer; }
+    .card.clickable:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.18);
+    }
+    .card.clickable::after {
+      content: "🔍 Cliquer pour agrandir";
+      display: block;
+      margin-top: 12px;
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+      font-style: italic;
+    }
+    .card.clickable.img-only::after { content: "🔍 Cliquer pour agrandir l'image"; }
+
+    /* FORMULAIRE */
+    .form-box {
+      max-width: 650px; margin: 0 auto;
+      background: var(--bg-card); padding: 40px;
+      border-radius: var(--radius); box-shadow: var(--shadow);
+    }
+    .form-box input, .form-box select, .form-box textarea {
+      width: 100%; padding: 14px; margin-bottom: 18px;
+      border: 1px solid var(--border-color); border-radius: 8px;
+      font-size: 1rem; font-family: inherit;
+      background: var(--bg-body); color: var(--text-main);
+    }
+    .form-box button {
+      width: 100%; padding: 15px; background: var(--primary); color: #FFFFFF;
+      border: none; border-radius: 8px; font-size: 1.05rem; font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .form-box button:hover { background: var(--primary-light); }
+
+    /* CONTACT */
+    .contact-info { text-align: center; max-width: 700px; margin: 0 auto; }
+    .contact-info p { margin: 10px 0; font-size: 1.05rem; }
+    .contact-info a { color: var(--primary); text-decoration: none; font-weight: 600; }
+    .langues { text-align: center; margin-top: 25px; font-weight: 600; color: var(--primary); }
+
+    /* FOOTER */
+    footer { background: #1A1A1A; color: #CCCCCC; text-align: center; padding: 40px 0 25px; }
+    footer .logo { color: #FFFFFF; margin-bottom: 15px; justify-content: center; }
+    footer .logo span { color: var(--accent); }
+    footer p { font-size: 0.9rem; margin: 5px 0; }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed; z-index: 9999;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.92);
+      justify-content: center; align-items: center;
+      padding: 20px; cursor: zoom-out;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img {
+      max-width: 95%; max-height: 90vh;
+      border-radius: 8px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      object-fit: contain;
+    }
+    .lightbox .close-lightbox {
+      position: absolute; top: 20px; right: 30px;
+      color: #fff; font-size: 2.5rem; font-weight: bold;
+      cursor: pointer; line-height: 1;
+    }
+
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed; z-index: 9998;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      justify-content: center; align-items: flex-start;
+      padding: 40px 20px; overflow-y: auto;
+    }
+    .modal.active { display: flex; }
+    .modal-content {
+      background: var(--bg-card); color: var(--text-main);
+      max-width: 800px; width: 100%;
+      border-radius: var(--radius); padding: 0;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      position: relative;
+      animation: modalFade 0.3s ease;
+    }
+    @keyframes modalFade {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .modal-content img { width: 100%; max-height: 70vh; object-fit: contain; background: #000; display: block; margin: 0 auto; }
+    .modal-body { padding: 30px; }
+    .modal-body h2 { color: var(--primary); margin-bottom: 15px; font-size: 1.8rem; }
+    .modal-body p { margin-bottom: 12px; color: var(--text-main); font-size: 1rem; line-height: 1.7; }
+    .modal-body ul { margin: 15px 0 15px 25px; }
+    .modal-body ul li { margin-bottom: 6px; color: var(--text-muted); }
+    .modal-close {
+      position: absolute; top: 15px; right: 20px;
+      background: rgba(0,0,0,0.6); color: #fff; border: none;
+      border-radius: 50%; width: 40px; height: 40px;
+      font-size: 1.5rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 10;
+    }
+    .modal-close:hover { background: var(--accent); color: #000; }
+
+    
+    /* GALERIE STYLE FACEBOOK */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    .gallery-item {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-radius: var(--radius);
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .gallery-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+
+    
+    /* GALERIE DANS LE MODAL */
+    .modal-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 10px;
+      padding: 20px 30px 0;
+    }
+    .modal-gallery img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: zoom-in;
+      transition: transform 0.2s;
+      border: 2px solid transparent;
+    }
+    .modal-gallery img:hover {
+      transform: scale(1.05);
+      border-color: var(--accent);
+    }
+    .modal-body h2 { margin-top: 10px; }
+
+    
+    /* NAVIGATION DANS LA LIGHTBOX */
+    .lightbox .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.4);
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      font-size: 1.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+      z-index: 10001;
+      user-select: none;
+    }
+    .lightbox .nav-btn:hover {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .lightbox .nav-prev { left: 20px; }
+    .lightbox .nav-next { right: 20px; }
+    .lightbox .lightbox-counter {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      background: rgba(0,0,0,0.6);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      z-index: 10001;
+    }
+    .lightbox .lightbox-caption {
+      position: absolute;
+      bottom: 25px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      background: rgba(0,0,0,0.7);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      text-align: center;
+      max-width: 80%;
+    }
+    @media (max-width: 700px) {
+      .lightbox .nav-btn { width: 45px; height: 45px; font-size: 1.4rem; }
+      .lightbox .nav-prev { left: 10px; }
+      .lightbox .nav-next { right: 10px; }
+    }
+
+    
+    /* ÉQUIPE / BUREAU */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      margin-top: 20px;
+    }
+    .team-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 30px 25px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      transition: transform 0.2s;
+      border-top: 4px solid var(--accent);
+    }
+    .team-card:hover { transform: translateY(-5px); }
+    .team-avatar {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; font-weight: 700;
+      margin: 0 auto 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+    .team-card h3 {
+      color: var(--primary);
+      margin-bottom: 5px;
+      font-size: 1.15rem;
+    }
+    .team-role {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .team-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .nav-links {
+        position: absolute; top: 70px; left: 0; right: 0;
+        background: var(--bg-body); flex-direction: column;
+        padding: 20px; gap: 15px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1); display: none;
+      }
+      .nav-links.active { display: flex; }
+      .menu-toggle { display: block; }
+      .hero { padding: 60px 0 50px; }
+      section { padding: 60px 0; }
+      .modal-body h2 { font-size: 1.4rem; }
+    }
+  
+    /* Caption masquée */
+    .lightbox .lightbox-caption { display: none !important; }
+
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container nav">
+      <div class="logo">
+        <img src="logo.png" alt="Logo APEXIS">
+        APEXIS <span>ENGINEERING</span>
+      </div>
+      <div class="nav-right">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#accueil" data-fr="Accueil" data-en="Home">Accueil</a></li>
+          <li><a href="#apropos" data-fr="À propos" data-en="About">À propos</a></li>
+          <li><a href="#activites" data-fr="Activités" data-en="Activities">Activités</a></li>
+          <li><a href="#domaines" data-fr="Domaines" data-en="Domains">Domaines</a></li>
+          <li><a href="#actualites" data-fr="Actualités" data-en="News">Actualités</a></li>
+          <li><a href="#evenements" data-fr="Événements" data-en="Events">Événements</a></li>
+                    <li><a href="#equipe" data-fr="Équipe" data-en="Team">Équipe</a></li>
+          <li><a href="#rejoindre" data-fr="Rejoindre" data-en="Join">Rejoindre</a></li>
+          <li><a href="#contact" data-fr="Contact" data-en="Contact">Contact</a></li>
+        </ul>
+        <div class="controls">
+          <button class="btn-ctrl" id="langToggle" onclick="toggleLanguage()">EN</button>
+          <button class="btn-ctrl" id="themeToggle" onclick="toggleTheme()">🌙</button>
+          <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="accueil" class="hero">
+    <div class="container">
+      <img src="logo.png" alt="Logo APEXIS ENGINEERING" class="hero-logo">
+      <h1 data-fr="APEXIS ENGINEERING" data-en="APEXIS ENGINEERING">APEXIS ENGINEERING</h1>
+      <p data-fr="Une communauté qui apprend, pratique et construit l'avenir du BTP." data-en="A community that learns, practices and builds the future of construction.">Une communauté qui apprend, pratique et construit l'avenir du BTP.</p>
+      <p class="slogan" data-fr="« Grandir scientifiquement ensemble. »" data-en="« Growing scientifically together. »">« Grandir scientifiquement ensemble. »</p>
+      <a href="#rejoindre" class="btn btn-primary" data-fr="Rejoindre la communauté" data-en="Join the community">Rejoindre la communauté</a>
+      <a href="#activites" class="btn btn-outline" data-fr="Découvrir nos activités" data-en="Discover our activities">Découvrir nos activités</a>
+    </div>
+  </section>
+
+  <!-- À PROPOS -->
+  <section id="apropos">
+    <div class="container">
+      <h2 class="section-title" data-fr="À propos" data-en="About Us">À propos</h2>
+      <p class="section-subtitle" data-fr="APEXIS ENGINEERING est une structure d'étudiants et de jeunes passionnés du Bâtiment et des Travaux Publics. Nous comblons le fossé entre la formation académique et la réalité professionnelle." data-en="APEXIS ENGINEERING is a structure of students and young enthusiasts of Construction and Public Works. We bridge the gap between academic training and professional reality.">APEXIS ENGINEERING est une structure d'étudiants et de jeunes passionnés du Bâtiment et des Travaux Publics. Nous comblons le fossé entre la formation académique et la réalité professionnelle.</p>
+      <div class="grid">
+        <div class="card">
+          <h3 data-fr="🎯 Notre vision" data-en="🎯 Our vision">🎯 Notre vision</h3>
+          <p data-fr="Construire une génération de professionnels du BTP compétents, pratiques, innovants et capables de contribuer au développement de la RDC et de l'Afrique." data-en="Building a generation of competent, practical, innovative construction professionals capable of contributing to the development of the DRC and Africa.">Construire une génération de professionnels du BTP compétents, pratiques, innovants et capables de contribuer au développement de la RDC et de l'Afrique.</p>
+        </div>
+        <div class="card">
+          <h3 data-fr="🚀 Notre mission" data-en="🚀 Our mission">🚀 Notre mission</h3>
+          <p data-fr="Favoriser l'apprentissage collectif, développer les compétences techniques, rapprocher les étudiants du terrain et créer un réseau de jeunes professionnels." data-en="Fostering collective learning, developing technical skills, bringing students closer to the field and creating a network of young professionals.">Favoriser l'apprentissage collectif, développer les compétences techniques, rapprocher les étudiants du terrain et créer un réseau de jeunes professionnels.</p>
+        </div>
+        <div class="card">
+          <h3 data-fr="💡 Nos valeurs" data-en="💡 Our values">💡 Nos valeurs</h3>
+          <p data-fr="Excellence — Apprentissage — Collaboration — Discipline — Innovation — Professionnalisme — Partage." data-en="Excellence — Learning — Collaboration — Discipline — Innovation — Professionalism — Sharing.">Excellence — Apprentissage — Collaboration — Discipline — Innovation — Professionnalisme — Partage.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTIVITÉS -->
+  <section id="activites">
+    <div class="container">
+      <h2 class="section-title" data-fr="Nos activités" data-en="Our Activities">Nos activités</h2>
+      <p class="section-subtitle" data-fr="Des activités concrètes pour apprendre, pratiquer et échanger." data-en="Concrete activities to learn, practice and exchange.">Des activités concrètes pour apprendre, pratiquer et échanger.</p>
+      <div class="grid">
+        <div class="card"><h3 data-fr="📚 Formations" data-en="📚 Training">📚 Formations</h3><p data-fr="Séances techniques, logiciels, méthodes de travail et outils professionnels." data-en="Technical sessions, software, working methods and professional tools.">Séances techniques, logiciels, méthodes de travail et outils professionnels.</p></div>
+        <div class="card"><h3 data-fr="🤝 Rencontres" data-en="🤝 Meetings">🤝 Rencontres</h3><p data-fr="Échanges avec des ingénieurs, architectes, techniciens et entrepreneurs." data-en="Exchanges with engineers, architects, technicians and entrepreneurs.">Échanges avec des ingénieurs, architectes, techniciens et entrepreneurs.</p></div>
+        <div class="card"><h3 data-fr="🏗️ Visites de chantier" data-en="🏗️ Site visits">🏗️ Visites de chantier</h3><p data-fr="Découverte des réalités du terrain, des entreprises et des infrastructures." data-en="Discovering the realities of the field, companies and infrastructures.">Découverte des réalités du terrain, des entreprises et des infrastructures.</p></div>
+        <div class="card"><h3 data-fr="🎤 Conférences" data-en="🎤 Conferences">🎤 Conférences</h3><p data-fr="Interventions de professionnels et spécialistes du secteur." data-en="Interventions by professionals and specialists in the sector.">Interventions de professionnels et spécialistes du secteur.</p></div>
+        <div class="card"><h3 data-fr="🛠️ Ateliers pratiques" data-en="🛠️ Workshops">🛠️ Ateliers pratiques</h3><p data-fr="Mise en pratique des connaissances acquises." data-en="Putting acquired knowledge into practice.">Mise en pratique des connaissances acquises.</p></div>
+        <div class="card"><h3 data-fr="📰 Contenus éducatifs" data-en="📰 Educational content">📰 Contenus éducatifs</h3><p data-fr="Publications, conseils, découvertes de métiers, logiciels et technologies." data-en="Publications, advice, career discoveries, software and technologies.">Publications, conseils, découvertes de métiers, logiciels et technologies.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOMAINES -->
+  <section id="domaines">
+    <div class="container">
+      <h2 class="section-title" data-fr="Nos domaines" data-en="Our Domains">Nos domaines</h2>
+      <p class="section-subtitle" data-fr="Les champs d'intérêt et de compétence d'APEXIS ENGINEERING." data-en="The fields of interest and expertise of APEXIS ENGINEERING.">Les champs d'intérêt et de compétence d'APEXIS ENGINEERING.</p>
+      <div class="tag-list">
+        <span class="tag" data-fr="Génie civil" data-en="Civil engineering">Génie civil</span>
+        <span class="tag" data-fr="Architecture" data-en="Architecture">Architecture</span>
+        <span class="tag" data-fr="Bâtiment & Travaux Publics" data-en="Building & Public Works">Bâtiment & Travaux Publics</span>
+        <span class="tag" data-fr="Béton & matériaux" data-en="Concrete & materials">Béton & matériaux</span>
+        <span class="tag" data-fr="Lecture de plans" data-en="Blueprint reading">Lecture de plans</span>
+        <span class="tag" data-fr="DAO" data-en="CAD">DAO</span>
+        <span class="tag" data-fr="BIM" data-en="BIM">BIM</span>
+        <span class="tag" data-fr="Robotisation" data-en="Robotization">Robotisation</span>
+        <span class="tag" data-fr="Logiciels professionnels" data-en="Professional software">Logiciels professionnels</span>
+        <span class="tag" data-fr="IA appliquée au BTP" data-en="AI in construction">IA appliquée au BTP</span>
+        <span class="tag" data-fr="Méthodes de construction" data-en="Construction methods">Méthodes de construction</span>
+        <span class="tag" data-fr="Visites de chantier" data-en="Site visits">Visites de chantier</span>
+        <span class="tag" data-fr="Innovation" data-en="Innovation">Innovation</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTUALITÉS -->
+  <section id="actualites">
+    <div class="container">
+      <h2 class="section-title" data-fr="Actualités / Blog" data-en="News / Blog">Actualités / Blog</h2>
+      <p class="section-subtitle" data-fr="Articles et contenus éducatifs sur le BTP, les nouvelles technologies et nos activités." data-en="Articles and educational content on construction, new technologies and our activities.">Articles et contenus éducatifs sur le BTP, les nouvelles technologies et nos activités.</p>
+      <div class="grid">
+        <!-- CONSEIL : NE JAMAIS MESURER SUR UN PLAN -->
+        <div class="card clickable" style="overflow: hidden; padding: 0; display: flex; flex-direction: column;" onclick="openEvent('tipLecturePlan')">
+          <img src="tip-plan-1.jpg" alt="Conseil - Lecture de plan" style="width: 100%; height: 200px; object-fit: cover;">
+          <div style="padding: 25px;">
+            <h3 data-fr="💡 Conseil — Ne jamais mesurer sur un plan" data-en="💡 Tip — Never measure on a blueprint">💡 Conseil — Ne jamais mesurer sur un plan</h3>
+            <p data-fr="Pourquoi il ne faut jamais mesurer directement sur un plan avec une règle, mais toujours utiliser les cotes." data-en="Why you should never measure directly on a blueprint with a ruler, but always use the dimensions.">Pourquoi il ne faut jamais mesurer directement sur un plan avec une règle, mais toujours utiliser les cotes.</p>
+          </div>
+        </div>
+
+        <!-- ARTICLE : FEMMES DANS LE BTP -->
+        <div class="card clickable" style="overflow: hidden; padding: 0; display: flex; flex-direction: column;" onclick="openEvent('femmesBTP')">
+          <img src="blog-femmes-btp.jpg" alt="Femmes dans le BTP" style="width: 100%; height: 250px; object-fit: cover;">
+          <div style="padding: 25px;">
+            <h3 data-fr="👷‍♀️ Femmes dans le BTP — Dream Big" data-en="👷‍♀️ Women in Construction — Dream Big">👷‍♀️ Femmes dans le BTP — Dream Big</h3>
+            <p data-fr="Dans le BTP, elles ne suivent pas le chemin, elles le construisent. Respect à toutes les femmes qui osent, qui bâtissent et qui inspirent." data-en="In construction, they don't follow the path, they build it. Respect to all women who dare, build and inspire.">Dans le BTP, elles ne suivent pas le chemin, elles le construisent. Respect à toutes les femmes qui osent, qui bâtissent et qui inspirent.</p>
+          </div>
+        </div>
+
+        <!-- ARTICLE : CITATION DALE CARNEGIE -->
+        <div class="card clickable" style="overflow: hidden; padding: 0; display: flex; flex-direction: column;" onclick="openEvent('citationCarnegie')">
+          <img src="blog-citation-carnegie.jpg" alt="Citation Dale Carnegie" style="width: 100%; height: 250px; object-fit: cover;">
+          <div style="padding: 25px;">
+            <h3 data-fr="🎓 Citation — Dale Carnegie" data-en="🎓 Quote — Dale Carnegie">🎓 Citation — Dale Carnegie</h3>
+            <p data-fr="Dans les professions scientifiques comme celle d'ingénieur, la réussite est due pour 15% environ aux connaissances techniques et pour 85% à la personnalité." data-en="In scientific professions such as engineering, success is due to about 15% technical knowledge and 85% personality.">Dans les professions scientifiques comme celle d'ingénieur, la réussite est due pour 15% environ aux connaissances techniques et pour 85% à la personnalité.</p>
+          </div>
+        </div>
+
+
+
+
+        <div class="card clickable"
+             onclick="openModal('<h2>📌 Article à venir</h2><p>Cet article présentera un sujet technique ou une actualité du secteur du BTP.</p><p>Revenez bientôt pour découvrir nos premiers contenus éducatifs !</p>', '')">
+          <h3 data-fr="📌 Article à venir" data-en="📌 Upcoming article">📌 Article à venir</h3>
+          <p data-fr="Présentation d'un sujet technique ou d'une actualité du secteur." data-en="Presentation of a technical topic or sector news.">Présentation d'un sujet technique ou d'une actualité du secteur.</p>
+        </div>
+        <div class="card clickable"
+             onclick="openModal('<h2>📌 Article à venir</h2><p>D\xc3\xa9couverte d\'un logiciel professionnel ou d\'une innovation technologique dans le BTP.</p><p>Revenez bientôt pour découvrir nos premiers contenus éducatifs !</p>', '')">
+          <h3 data-fr="📌 Article à venir" data-en="📌 Upcoming article">📌 Article à venir</h3>
+          <p data-fr="Découverte d'un logiciel professionnel ou d'une innovation." data-en="Discovery of professional software or an innovation.">Découverte d'un logiciel professionnel ou d'une innovation.</p>
+        </div>
+        <div class="card clickable"
+             onclick="openModal('<h2>📌 Article à venir</h2><p>Retour sur une activité ou une rencontre organisée par APEXIS ENGINEERING.</p><p>Revenez bientôt pour découvrir nos premiers contenus éducatifs !</p>', '')">
+          <h3 data-fr="📌 Article à venir" data-en="📌 Upcoming article">📌 Article à venir</h3>
+          <p data-fr="Retour sur une activité ou une rencontre d'APEXIS." data-en="Feedback on an APEXIS activity or meeting.">Retour sur une activité ou une rencontre d'APEXIS.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ÉVÉNEMENTS -->
+  <section id="evenements">
+    <div class="container">
+      <h2 class="section-title" data-fr="Événements" data-en="Events">Événements</h2>
+      <p class="section-subtitle" data-fr="Prochaines formations, visites et rencontres." data-en="Upcoming training, visits and meetings.">Prochaines formations, visites et rencontres.</p>
+      <div class="grid">
+
+        <!-- ÉVÉNEMENT : RÉUNION DE CRÉATION -->
+        <div class="card clickable" style="overflow: hidden; padding: 0; display: flex; flex-direction: column;" onclick="openEvent('creation')">
+          <img src="event-creation.jpg" alt="Réunion de création APEXIS" style="width: 100%; height: 250px; object-fit: cover;">
+          <div style="padding: 25px;">
+            <h3 data-fr="🏛️ Réunion de création d'APEXIS" data-en="🏛️ APEXIS Creation Meeting">🏛️ Réunion de création d'APEXIS</h3>
+            <p style="font-size: 0.9rem; color: var(--accent); font-weight: bold; margin-bottom: 8px;" data-fr="📅 31 Janvier 2026" data-en="📅 January 31, 2026">📅 31 Janvier 2026</p>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;" data-fr="📍 Restaurant Indigo, N'djili Sainte Thérèse, Kinshasa" data-en="📍 Indigo Restaurant, N'djili Sainte Thérèse, Kinshasa">📍 Restaurant Indigo, N'djili Sainte Thérèse, Kinshasa</p>
+            <p data-fr="Première réunion historique portant sur la création officielle de la structure APEXIS ENGINEERING." data-en="First historic meeting on the official creation of the APEXIS ENGINEERING structure.">Première réunion historique portant sur la création officielle de la structure APEXIS ENGINEERING.</p>
+          </div>
+        </div>
+
+        <!-- ÉVÉNEMENT : EXPOSITION #1 -->
+        <div class="card clickable" style="overflow: hidden; padding: 0; display: flex; flex-direction: column;" onclick="openEvent('exposition1')">
+          <img src="expo-lecture-plan.jpg" alt="Exposition Lecture du plan" style="width: 100%; height: 280px; object-fit: cover;">
+          <div style="padding: 25px;">
+            <h3 data-fr="📐 Exposition #1 — Lecture du plan" data-en="📐 Exhibition #1 — Blueprint Reading">📐 Exposition #1 — Lecture du plan</h3>
+            <p style="font-size: 0.9rem; color: var(--accent); font-weight: bold; margin-bottom: 8px;" data-fr="📅 Samedi 21 Mars 2026 — 10H-12H" data-en="📅 Saturday, March 21, 2026 — 10AM-12PM">📅 Samedi 21 Mars 2026 — 10H-12H</p>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;" data-fr="📍 Salle CLAC Bandalungwa, Kinshasa" data-en="📍 CLAC Hall Bandalungwa, Kinshasa">📍 Salle CLAC Bandalungwa, Kinshasa</p>
+            <p data-fr="Comprendre un plan : les bases d'exécution et de lecture du plan. Intervention de Prospère Fuluma." data-en="Understanding a blueprint: the basics of execution and blueprint reading. Presentation by Prospère Fuluma.">Comprendre un plan : les bases d'exécution et de lecture du plan. Intervention de Prospère Fuluma.</p>
+          </div>
+        </div>
+
+        <!-- ÉVÉNEMENT : EXPOSITION #2 - LE BÉTON -->
+        <div class="card clickable" style="overflow: hidden; padding: 0; display: flex; flex-direction: column;" onclick="openEvent('exposition2')">
+          <img src="expo2-beton-affiche.jpg" alt="Exposition #2 - Le béton" style="width: 100%; height: 280px; object-fit: cover;">
+          <div style="padding: 25px;">
+            <h3 data-fr="🧱 Exposition #2 — Le béton dans le BTP" data-en="🧱 Exhibition #2 — Concrete in Construction">🧱 Exposition #2 — Le béton dans le BTP</h3>
+            <p style="font-size: 0.9rem; color: var(--accent); font-weight: bold; margin-bottom: 8px;" data-fr="📅 Samedi 28 Mars 2026 — 11H00" data-en="📅 Saturday, March 28, 2026 — 11:00 AM">📅 Samedi 28 Mars 2026 — 11H00</p>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;" data-fr="📍 Salle CLAC Bandalungwa (Maison Communale), Kinshasa" data-en="📍 CLAC Hall Bandalungwa (Town Hall), Kinshasa">📍 Salle CLAC Bandalungwa (Maison Communale), Kinshasa</p>
+            <p data-fr="Composition, types et utilisation du béton en construction. Intervention de Donvie Bosabia." data-en="Composition, types and use of concrete in construction. Presentation by Donvie Bosabia.">Composition, types et utilisation du béton en construction. Intervention de Donvie Bosabia.</p>
+          </div>
+        </div>
+
+        <!-- ÉVÉNEMENT : INGENIERIE 4.0 - L'IA DANS LE BTP -->
+        <div class="card clickable" style="overflow: hidden; padding: 0; display: flex; flex-direction: column;" onclick="openEvent('iaBTP')">
+          <img src="ia-btp-affiche.jpg" alt="Ingénierie 4.0 - L'impact de l'IA dans le BTP" style="width: 100%; height: 280px; object-fit: cover;">
+          <div style="padding: 25px;">
+            <h3 data-fr="🤖 Ingénierie 4.0 — L'IA dans le BTP" data-en="🤖 Engineering 4.0 — AI in Construction">🤖 Ingénierie 4.0 — L'IA dans le BTP</h3>
+            <p style="font-size: 0.9rem; color: var(--accent); font-weight: bold; margin-bottom: 8px;" data-fr="📅 Samedi 04 Avril 2026 — 12H00 à 13H30" data-en="📅 Saturday, April 4, 2026 — 12:00 to 1:30 PM">📅 Samedi 04 Avril 2026 — 12H00 à 13H30</p>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;" data-fr="📍 Salle CLAC Bandalungwa (Maison Communale), Kinshasa" data-en="📍 CLAC Hall Bandalungwa (Town Hall), Kinshasa">📍 Salle CLAC Bandalungwa (Maison Communale), Kinshasa</p>
+            <p data-fr="L'impact de l'intelligence artificielle dans le BTP. Intervention de Pierre Gianni Dangi, Ir IA." data-en="The impact of artificial intelligence in construction. Presentation by Pierre Gianni Dangi, AI Engineer.">L'impact de l'intelligence artificielle dans le BTP. Intervention de Pierre Gianni Dangi, Ir IA.</p>
+          </div>
+        </div>
+
+        <!-- ÉVÉNEMENT : EXPO 3 - LA CONSTRUCTION PRÉFABRIQUÉE -->
+        <div class="card clickable" style="overflow: hidden; padding: 0; display: flex; flex-direction: column;" onclick="openEvent('expo3')">
+          <img src="expo3-affiche.jpg" alt="Expo 3 - La construction préfabriquée" style="width: 100%; height: 280px; object-fit: cover;">
+          <div style="padding: 25px;">
+            <h3 data-fr="🏗️ Expo 3 — La construction préfabriquée" data-en="🏗️ Expo 3 — Prefabricated Construction">🏗️ Expo 3 — La construction préfabriquée</h3>
+            <p style="font-size: 0.9rem; color: var(--accent); font-weight: bold; margin-bottom: 8px;" data-fr="📅 Samedi 11 Avril 2026 — 12H00 à 13H30" data-en="📅 Saturday, April 11, 2026 — 12:00 to 1:30 PM">📅 Samedi 11 Avril 2026 — 12H00 à 13H30</p>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;" data-fr="📍 Salle CLAC Bandalungwa, Kinshasa" data-en="📍 CLAC Hall Bandalungwa, Kinshasa">📍 Salle CLAC Bandalungwa, Kinshasa</p>
+            <p data-fr="Construire autrement : la préfabrication en usine, puis assemblage sur chantier. Intervention d'Exaucée Eshimu, étudiant en architecture (ISAU)." data-en="Building differently: prefabrication in factory, then assembly on site. Presentation by Exaucée Eshimu, architecture student (ISAU).">Construire autrement : la préfabrication en usine, puis assemblage sur chantier. Intervention d'Exaucée Eshimu, étudiant en architecture (ISAU).</p>
+          </div>
+        </div>
+
+        <!-- ÉVÉNEMENT : EXPO 4 - LES MATÉRIAUX DE CONSTRUCTION -->
+        <div class="card clickable" style="overflow: hidden; padding: 0; display: flex; flex-direction: column;" onclick="openEvent('expo4')">
+          <img src="expo4-affiche.jpg" alt="Expo 4 - Les matériaux de construction" style="width: 100%; height: 280px; object-fit: cover;">
+          <div style="padding: 25px;">
+            <h3 data-fr="🏗️ Expo 4 — Les matériaux de construction" data-en="🏗️ Expo 4 — Construction Materials">🏗️ Expo 4 — Les matériaux de construction</h3>
+            <p style="font-size: 0.9rem; color: var(--accent); font-weight: bold; margin-bottom: 8px;" data-fr="📅 Samedi 18 Avril 2026 — 12H00" data-en="📅 Saturday, April 18, 2026 — 12:00 PM">📅 Samedi 18 Avril 2026 — 12H00</p>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;" data-fr="📍 Salle CLAC Bandalungwa (Maison Communale), Kinshasa" data-en="📍 CLAC Hall Bandalungwa (Town Hall), Kinshasa">📍 Salle CLAC Bandalungwa (Maison Communale), Kinshasa</p>
+            <p data-fr="Comprendre les matériaux, c'est comprendre la base de toute structure. Intervention de Persie Kumbi." data-en="Understanding materials is understanding the base of any structure. Presentation by Persie Kumbi.">Comprendre les matériaux, c'est comprendre la base de toute structure. Intervention de Persie Kumbi.</p>
+          </div>
+        </div>
+
+        <!-- ÉVÉNEMENT : VISITE DE LA ROCADE DE KINSHASA -->
+        <div class="card clickable" style="overflow: hidden; padding: 0; display: flex; flex-direction: column;" onclick="openEvent('visiteRocade')">
+          <img src="visite-rocade.jpg" alt="Visite à la Rocade de Kinshasa" style="width: 100%; height: 280px; object-fit: cover;">
+          <div style="padding: 25px;">
+            <h3 data-fr="🚧 Visite à la Rocade de Kinshasa" data-en="🚧 Visit to the Kinshasa Bypass">🚧 Visite à la Rocade de Kinshasa</h3>
+            <p style="font-size: 0.9rem; color: var(--accent); font-weight: bold; margin-bottom: 8px;" data-fr="📅 Samedi 17 Octobre 2026 — 10H00" data-en="📅 Saturday, October 17, 2026 — 10:00 AM">📅 Samedi 17 Octobre 2026 — 10H00</p>
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px;" data-fr="📍 Entrée Mikondo, lieu de rassemblement, Kinshasa" data-en="📍 Mikondo Entrance, meeting point, Kinshasa">📍 Entrée Mikondo, lieu de rassemblement, Kinshasa</p>
+            <p data-fr="Visite de chantier sur la Rocade de Kinshasa : voir le terrain, observer les travaux, analyser les détails de cette infrastructure structurante." data-en="Site visit to the Kinshasa Bypass: see the field, observe the works, analyze the details of this structuring infrastructure.">Visite de chantier sur la Rocade de Kinshasa : voir le terrain, observer les travaux, analyser les détails de cette infrastructure structurante.</p>
+          </div>
+        </div>
+
+        <!-- ÉVÉNEMENT À VENIR -->
+        <div class="card">
+          <h3 data-fr="📅 Prochain événement" data-en="📅 Upcoming event">📅 Prochain événement</h3>
+          <p data-fr="Date et lieu à préciser." data-en="Date and location to be specified.">Date et lieu à préciser.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETS / GALERIE -->
+  <section id="projets">
+    <div class="container">
+      <h2 class="section-title" data-fr="Projets / Galerie" data-en="Projects / Gallery">Projets / Galerie</h2>
+      <p class="section-subtitle" data-fr="Photos et présentations de nos activités, visites et ateliers." data-en="Photos and presentations of our activities, visits and workshops.">Photos et présentations de nos activités, visites et ateliers.</p>
+      <div class="gallery-grid">
+        <div class="gallery-item" onclick="openLightbox('tip-plan-1.jpg')" title="Conseil - Plan et cotation">
+          <img src="tip-plan-1.jpg" alt="Plan avec cotation">
+        </div>
+        <div class="gallery-item" onclick="openLightbox('tip-plan-2.jpg')" title="Conseil - Plan détaillé">
+          <img src="tip-plan-2.jpg" alt="Plan détaillé">
+        </div>
+        <div class="gallery-item" onclick="openLightbox('tip-plan-3.jpg')" title="Conseil - Plan 5 chambres">
+          <img src="tip-plan-3.jpg" alt="Plan 5 chambres">
+        </div>
+
+        <!-- Événement : Création -->
+        <div class="gallery-item" onclick="openLightbox('event-creation.jpg')" title="Réunion de création">
+          <img src="event-creation.jpg" alt="Réunion de création">
+        </div>
+        <!-- Événement : Exposition #1 -->
+        <div class="gallery-item" onclick="openLightbox('expo-lecture-plan.jpg')" title="Affiche Exposition #1 - Lecture du plan">
+          <img src="expo-lecture-plan.jpg" alt="Affiche Exposition #1">
+        </div>
+        <div class="gallery-item" onclick="openLightbox('expo-presentation.jpg')" title="Exposition #1 - Présentation par Prospère Fuluma">
+          <img src="expo-presentation.jpg" alt="Exposition - Présentation">
+        </div>
+        <div class="gallery-item" onclick="openLightbox('expo-equipe-clac.jpg')" title="Équipe APEXIS devant le CLAC">
+          <img src="expo-equipe-clac.jpg" alt="Équipe devant le CLAC">
+        </div>
+        <div class="gallery-item" onclick="openLightbox('expo-reunion.jpg')" title="Préparation de l'Exposition #1">
+          <img src="expo-reunion.jpg" alt="Préparation en équipe">
+        </div>
+        <div class="gallery-item" onclick="openLightbox('expo-plan-ordinateur.jpg')" title="Lecture du plan en pratique">
+          <img src="expo-plan-ordinateur.jpg" alt="Lecture du plan en pratique">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTRE ÉQUIPE -->
+  <section id="equipe">
+    <div class="container">
+      <h2 class="section-title" data-fr="Notre Équipe" data-en="Our Team">Notre Équipe</h2>
+      <p class="section-subtitle" data-fr="Les responsables qui font vivre APEXIS ENGINEERING au quotidien." data-en="The leaders who keep APEXIS ENGINEERING alive every day.">Les responsables qui font vivre APEXIS ENGINEERING au quotidien.</p>
+      <div class="team-grid">
+
+        <!-- Membre 1 -->
+        <div class="team-card">
+          <div class="team-avatar">PF</div>
+          <h3>Prospère Fuluma</h3>
+          <div class="team-role" data-fr="Président / Intervenant" data-en="President / Speaker">Président / Intervenant</div>
+          <p data-fr="Coordination générale, animation des exposés et représentation de la structure." data-en="General coordination, leading presentations and representing the structure.">Coordination générale, animation des exposés et représentation de la structure.</p>
+        </div>
+
+        <!-- Membre 2 -->
+        <div class="team-card">
+          <div class="team-avatar">IA</div>
+          <h3>Isaac Ambalu</h3>
+          <div class="team-role" data-fr="Vice-Président" data-en="Vice-President">Vice-Président</div>
+          <p data-fr="Appui à la coordination, gestion des activités et suivi des membres." data-en="Support to coordination, activity management and member follow-up.">Appui à la coordination, gestion des activités et suivi des membres.</p>
+        </div>
+
+        <!-- Membre 3 -->
+        <div class="team-card">
+          <div class="team-avatar">NN</div>
+          <h3>Nathan Ngolomba</h3>
+          <div class="team-role" data-fr="Secrétaire Général" data-en="General Secretary">Secrétaire Général</div>
+          <p data-fr="Rédaction des comptes rendus, archivage et communication interne." data-en="Writing reports, archiving and internal communication.">Rédaction des comptes rendus, archivage et communication interne.</p>
+        </div>
+
+        <!-- Membre 4 -->
+        <div class="team-card">
+          <div class="team-avatar">SK</div>
+          <h3>Sam Kazadi</h3>
+          <div class="team-role" data-fr="Chargé de l'Informatique & Relations Extérieures" data-en="IT Manager & External Relations">Chargé de l'Informatique & Relations Extérieures</div>
+          <p data-fr="Gestion du site web, réseaux sociaux, partenariats stratégiques et expansion de la structure." data-en="Website management, social media, strategic partnerships and structure expansion.">Gestion du site web, réseaux sociaux, partenariats stratégiques et expansion de la structure.</p>
+        </div>
+
+        <!-- Membre 5 -->
+        <div class="team-card">
+          <div class="team-avatar">DB</div>
+          <h3>Donvie Bosabia</h3>
+          <div class="team-role" data-fr="Chargé des Exposés Techniques" data-en="Technical Presentations Officer">Chargé des Exposés Techniques</div>
+          <p data-fr="Préparation et animation des séances techniques (béton, matériaux, structures)." data-en="Preparation and leading of technical sessions (concrete, materials, structures).">Préparation et animation des séances techniques (béton, matériaux, structures).</p>
+        </div>
+
+        <!-- Membre 6 -->
+        <div class="team-card">
+          <div class="team-avatar">BB</div>
+          <h3>Baptiste Bulu</h3>
+          <div class="team-role" data-fr="Chargé de la Logistique" data-en="Logistics Officer">Chargé de la Logistique</div>
+          <p data-fr="Organisation matérielle des séances, visites de chantier et événements." data-en="Material organization of sessions, site visits and events.">Organisation matérielle des séances, visites de chantier et événements.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+<!-- PARTENAIRES -->
+  <section id="partenaires">
+    <div class="container">
+      <h2 class="section-title" data-fr="Partenaires" data-en="Partners">Partenaires</h2>
+      <p class="section-subtitle" data-fr="Entreprises, professionnels et institutions qui collaborent avec APEXIS." data-en="Companies, professionals and institutions collaborating with APEXIS.">Entreprises, professionnels et institutions qui collaborent avec APEXIS.</p>
+      <div class="grid">
+        <div class="card"><h3 data-fr="Partenaire 1" data-en="Partner 1">Partenaire 1</h3><p data-fr="Logo et description à ajouter." data-en="Logo and description to add.">Logo et description à ajouter.</p></div>
+        <div class="card"><h3 data-fr="Partenaire 2" data-en="Partner 2">Partenaire 2</h3><p data-fr="Logo et description à ajouter." data-en="Logo and description to add.">Logo et description à ajouter.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REJOINDRE -->
+  <section id="rejoindre">
+    <div class="container">
+      <h2 class="section-title" data-fr="Rejoindre APEXIS" data-en="Join APEXIS">Rejoindre APEXIS</h2>
+      <p class="section-subtitle" data-fr="Remplis le formulaire pour manifester ton intérêt et rejoindre la communauté." data-en="Fill out the form to express your interest and join the community.">Remplis le formulaire pour manifester ton intérêt et rejoindre la communauté.</p>
+      <div class="form-box">
+        <form action="#" method="POST">
+          <input type="text" name="nom" placeholder="Nom complet / Full name" required>
+          <input type="email" name="email" placeholder="Adresse e-mail / Email address" required>
+          <input type="tel" name="telephone" placeholder="Téléphone / Phone">
+          <select name="profil">
+            <option value="" data-fr="-- Ton profil --" data-en="-- Your profile --">-- Ton profil --</option>
+            <option data-fr="Étudiant en génie civil" data-en="Civil engineering student">Étudiant en génie civil</option>
+            <option data-fr="Étudiant en architecture" data-en="Architecture student">Étudiant en architecture</option>
+            <option data-fr="Étudiant BTP" data-en="Construction student">Étudiant BTP</option>
+            <option data-fr="Jeune diplômé" data-en="Young graduate">Jeune diplômé</option>
+            <option data-fr="Jeune professionnel" data-en="Young professional">Jeune professionnel</option>
+            <option data-fr="Autre" data-en="Other">Autre</option>
+          </select>
+          <textarea name="message" rows="4" placeholder="Pourquoi veux-tu rejoindre APEXIS ? / Why do you want to join APEXIS?"></textarea>
+          <button type="submit" data-fr="Envoyer ma demande" data-en="Send my request">Envoyer ma demande</button>
+        </form>
+        <p style="margin-top:15px; font-size:0.9rem; color:var(--text-muted); text-align:center;" data-fr="⚠️ Remplace l'action du formulaire par ton lien Google Forms ou Formspree." data-en="⚠️ Replace the form action with your Google Forms or Formspree link.">⚠️ Remplace l'action du formulaire par ton lien Google Forms ou Formspree.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title" data-fr="Contact" data-en="Contact">Contact</h2>
+      <div class="contact-info">
+        <p>📧 E-mail : <a href="mailto:apexisengineering97@gmail.com">apexisengineering97@gmail.com</a></p>
+        <p>📱 Téléphone / WhatsApp : <a href="https://wa.me/243825607535" target="_blank" rel="noopener">+243 825 607 535</a></p>
+        <p data-fr="📍 Adresse : Salle CLAC Bandalungwa, Kinshasa, RDC" data-en="📍 Address: CLAC Hall Bandalungwa, Kinshasa, DRC">📍 Adresse : Salle CLAC Bandalungwa, Kinshasa, RDC</p>
+        <p>📘 Facebook : <a href="https://www.facebook.com/profile.php?id=61578469929873" target="_blank" rel="noopener">Apexis-BTP</a></p>
+        <div class="langues" data-fr="🗣️ Nos langues : Français • Lingala • Anglais • Kikongo • Tshiluba • Swahili" data-en="🗣️ Our languages: French • Lingala • English • Kikongo • Tshiluba • Swahili">🗣️ Nos langues : Français • Lingala • Anglais • Kikongo • Tshiluba • Swahili</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="logo">
+        <img src="logo.png" alt="Logo APEXIS" style="height: 40px;">
+        APEXIS <span>ENGINEERING</span>
+      </div>
+      <p data-fr="« Grandir scientifiquement ensemble. »" data-en="« Growing scientifically together. »">« Grandir scientifiquement ensemble. »</p>
+      <p>📧 <a href="mailto:apexisengineering97@gmail.com">apexisengineering97@gmail.com</a> | 📱 <a href="https://wa.me/243825607535" target="_blank" rel="noopener">+243 825 607 535</a></p>
+      <p data-fr="📍 Salle CLAC Bandalungwa, Kinshasa, RDC" data-en="📍 CLAC Hall Bandalungwa, Kinshasa, DRC">📍 Salle CLAC Bandalungwa, Kinshasa, RDC</p>
+      <p>📘 <a href="https://www.facebook.com/profile.php?id=61578469929873" target="_blank" rel="noopener">Facebook — Apexis-BTP</a></p>
+      <p>© 2026 APEXIS ENGINEERING. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+    <span class="lightbox-counter" id="lightboxCounter">1 / 1</span>
+    <button class="nav-btn nav-prev" onclick="lightboxPrev(event)" aria-label="Précédent">&#10094;</button>
+    <img src="" alt="Image agrandie" id="lightboxImg">
+    <button class="nav-btn nav-next" onclick="lightboxNext(event)" aria-label="Suivant">&#10095;</button>
+    
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal" id="modal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <img src="" alt="" id="modalImg">
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // ============ LANGUE ============
+    let currentLang = localStorage.getItem('apexis_lang') || 'fr';
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('apexis_lang', lang);
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-fr]').forEach(function(el) {
+        if (el.tagName === 'OPTION') {
+          el.textContent = el.getAttribute('data-' + lang);
+        } else if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          // skip
+        } else {
+          el.innerHTML = el.getAttribute('data-' + lang);
+        }
+      });
+      var lt = document.getElementById('langToggle');
+      if (lt) lt.textContent = lang === 'fr' ? 'EN' : 'FR';
+    }
+    function toggleLanguage() { setLanguage(currentLang === 'fr' ? 'en' : 'fr'); }
+
+    // ============ THEME ============
+    let currentTheme = localStorage.getItem('apexis_theme') || 'light';
+    function setTheme(theme) {
+      currentTheme = theme;
+      localStorage.setItem('apexis_theme', theme);
+      var tt = document.getElementById('themeToggle');
+      if (theme === 'dark') {
+        document.body.classList.add('dark-mode');
+        if (tt) tt.textContent = '☀️';
+      } else {
+        document.body.classList.remove('dark-mode');
+        if (tt) tt.textContent = '🌙';
+      }
+    }
+    function toggleTheme() { setTheme(currentTheme === 'light' ? 'dark' : 'light'); }
+
+    // ============ MENU ============
+    function toggleMenu() {
+      var nl = document.getElementById('navLinks');
+      if (nl) nl.classList.toggle('active');
+    }
+
+    // ============ DONNEES DES EVENEMENTS ============
+    const EVENTS = {
+      creation: {
+        photos: ['event-creation.jpg'],
+        html: `<h2>🏛️ Réunion de création d'APEXIS</h2>
+          <p><strong>📅 Date :</strong> 31 Janvier 2026</p>
+          <p><strong>📍 Lieu :</strong> Restaurant Indigo, N'djili Sainte Thérèse, Kinshasa</p>
+          <p><strong>📝 Description :</strong></p>
+          <p>Première réunion historique portant sur la création officielle de la structure APEXIS ENGINEERING. Un moment fondateur pour notre communauté.</p>
+          <p><strong>👥 Membres fondateurs (de gauche à droite) :</strong></p>
+          <ul>
+            <li>Prospère Fuluma</li>
+            <li>Isaac Ambalu</li>
+            <li>Nathan Ngolomba</li>
+            <li>Sam Kazadi</li>
+            <li>Donvie Bosabia</li>
+            <li>Baptiste Bulu</li>
+          </ul>
+          <p style="margin-top:20px; font-style:italic; color:#F2A900; font-weight:600;">« Grandir scientifiquement ensemble. »</p>`
+      },
+      exposition1: {
+        photos: ['expo-lecture-plan.jpg', 'expo-presentation.jpg', 'expo-equipe-clac.jpg', 'expo-reunion.jpg', 'expo-plan-ordinateur.jpg'],
+        html: `<h2>📐 Exposition #1 — Lecture du plan</h2>
+          <p><strong>📅 Date :</strong> Samedi 21 Mars 2026</p>
+          <p><strong>🕙 Heure :</strong> 10H - 12H</p>
+          <p><strong>📍 Lieu :</strong> Salle CLAC Bandalungwa (Réf. Maison Communale de Bandalungwa), Kinshasa</p>
+          <p><strong>🎤 Intervention :</strong> Prospère Fuluma</p>
+          <p><strong>📝 Description :</strong></p>
+          <p>En date du 21 mars, nous avons parlé d'un élément fondamental en génie civil : la lecture de plan. Avant même de poser une brique ou de commencer un chantier, tout commence par un plan. Le plan est le langage que les ingénieurs utilisent pour transformer une idée en réalité.</p>
+          <p style="margin-top:15px;"><strong>🎯 Thèmes abordés :</strong></p>
+          <ul>
+            <li>Comprendre un plan</li>
+            <li>Les bases d'exécution et de lecture du plan</li>
+            <li>Lecture du plan en pratique</li>
+          </ul>
+          <p style="margin-top:20px; font-style:italic; color:#F2A900; font-weight:600;">« Bâtir, c'est laisser un héritage durable à l'humanité. » 🧩</p>
+          <p style="margin-top:20px; font-weight:600;">APEXIS ENGINEERING — Structure 🏗️</p>`
+      },
+      exposition2: {
+        photos: ['expo2-beton-affiche.jpg', 'expo2-presentation-1.jpg', 'expo2-reunion-1.jpg', 'expo2-presentation-2.jpg', 'expo2-reunion-2.jpg', 'expo2-presentation-3.jpg'],
+        html: `<h2>🧱 Exposition #2 — Le béton dans le BTP</h2>
+          <p><strong>📅 Date :</strong> Samedi 28 Mars 2026</p>
+          <p><strong>🕙 Heure :</strong> 11H00</p>
+          <p><strong>📍 Lieu :</strong> Salle CLAC Bandalungwa (Maison Communale), Kinshasa</p>
+          <p><strong>🎤 Intervention :</strong> Donvie Bosabia</p>
+          <p><strong>📝 Description :</strong></p>
+          <p>Dans le cadre de nos séances hebdomadaires, APEXIS a organisé un exposé sur un thème fondamental en construction : le béton. Un matériau essentiel dans le domaine du BTP, au cœur de presque toutes les structures.</p>
+          <p style="margin-top:15px;"><strong>🎯 Thèmes abordés :</strong></p>
+          <ul>
+            <li>La composition du béton</li>
+            <li>Les différents types de béton</li>
+            <li>Son importance dans les constructions</li>
+          </ul>
+          <p style="margin-top:20px; font-style:italic; color:#F2A900; font-weight:600;">« Le béton, c'est la base de toute construction. » 🏗️</p>
+          <p style="margin-top:20px; font-weight:600;">APEXIS ENGINEERING — Construisons notre savoir 🧩</p>`
+      }
+,
+      tipLecturePlan: {
+        photos: ['tip-plan-1.jpg', 'tip-plan-2.jpg', 'tip-plan-3.jpg'],
+        html: `<h2>💡 Astuce — Ne mesure jamais directement sur un plan</h2>
+          <p style="color:#e74c3c; font-weight:600; font-size:1.1rem;">❌ Ne mesure jamais directement sur un plan avec une règle.</p>
+          <p style="color:#27ae60; font-weight:600; font-size:1.1rem;">👉 Utilise toujours les cotes !</p>
+          <p style="margin-top:20px;"><strong>Pourquoi ?</strong></p>
+          <p>Parce que <strong>seule la cotation donne les dimensions réelles</strong>. Sans la cotation, le plan est inutilisable sur le chantier.</p>
+          <p style="margin-top:20px;">Un point que nous avons abordé le samedi dernier lors de l'exposé <strong>« Lecture du plan »</strong>.</p>
+          <p style="margin-top:25px; text-align:center; font-style:italic; font-size:1.2rem; color:#F2A900; font-weight:700;">
+            « Le dessin montre… la cotation précise. » 🥷🏽📚🏗️
+          </p>
+          <p style="margin-top:25px; text-align:center; color:#888; font-size:0.9rem;">
+            #APEXIS #BTP #Conseil
+          </p>`
+      }
+,
+      femmesBTP: {
+        photos: ['blog-femmes-btp.jpg'],
+        html: `<h2>👷‍♀️ Femmes dans le BTP — Dream Big</h2>
+          <p style="text-align:center; font-style:italic; font-size:1.2rem; color:#F2A900; font-weight:700; margin:20px 0;">
+            « Elles ne suivent pas le chemin, elles le construisent. » 🏗️
+          </p>
+          <p style="font-size:1.05rem; margin-top:20px;">
+            🫡 <strong>Respect à toutes les femmes</strong> qui osent, qui bâtissent et qui inspirent.
+          </p>
+          <p style="font-size:1.05rem; margin-top:15px;">
+            Le mois de <strong>mars est le vôtre</strong> 🙌🎉
+          </p>
+          <p style="margin-top:25px; text-align:center; font-size:1rem; color:#27ae60; font-weight:600;">
+            🏗️👷‍♀️ Tague en commentaire une fille que tu connais qui fait le BTP 🙌
+          </p>
+          <p style="margin-top:25px; text-align:center; color:#888; font-size:0.9rem;">
+            #APEXIS #BTP #FemmesDansLeBTP #DreamBig #GénieCivil
+          </p>`
+      }
+,
+      citationCarnegie: {
+        photos: ['blog-citation-carnegie.jpg'],
+        html: `<h2>🎓 Citation — Dale Carnegie</h2>
+          <p style="margin-top:25px; font-size:1.3rem; font-style:italic; text-align:center; color:#F2A900; font-weight:600; line-height:1.6;">
+            « Dans les professions scientifiques comme celle d'ingénieur, la réussite est due pour 15% environ aux connaissances techniques et pour 85% à la personnalité. »
+          </p>
+          <p style="text-align:right; margin-top:15px; font-weight:700; color:#4A90E2; font-size:1.1rem;">— Dale Carnegie</p>
+          <p style="margin-top:30px; font-size:1.05rem;">
+            💡 <strong>Le message d'APEXIS :</strong> Au-delà des compétences techniques, cultiver sa <strong>personnalité</strong>, son <strong>leadership</strong>, sa <strong>communication</strong> et son <strong>réseau</strong> est essentiel pour réussir dans le BTP.
+          </p>
+          <p style="margin-top:20px; font-size:1rem; font-style:italic; color:#27ae60; font-weight:600;">
+            🏗️ Construisons notre savoir — et notre caractère.
+          </p>
+          <p style="margin-top:25px; text-align:center; color:#888; font-size:0.9rem;">
+            #APEXIS #BTP #Citation #GénieCivil #DaleCarnegie
+          </p>`
+      }
+,
+      iaBTP: {
+        photos: ['ia-btp-affiche.jpg', 'ia-btp-1.jpg', 'ia-btp-2.jpg', 'ia-btp-3.jpg', 'ia-btp-4.jpg', 'ia-btp-5.jpg', 'ia-btp-6.jpg', 'ia-btp-7.jpg'],
+        html: `<h2>🤖 Ingénierie 4.0 — L'impact de l'IA dans le BTP</h2>
+          <p><strong>📅 Date :</strong> Samedi 04 Avril 2026</p>
+          <p><strong>🕙 Heure :</strong> 12H00 à 13H30</p>
+          <p><strong>📍 Lieu :</strong> Salle CLAC Bandalungwa (Maison Communale), Kinshasa</p>
+          <p><strong>🎤 Intervention :</strong> Pierre Gianni Dangi, Ir IA</p>
+          <p><strong>📝 Description :</strong></p>
+          <p>Le samedi 04 avril, nous avons eu l'honneur d'échanger autour d'un thème d'actualité et d'avenir : <strong>l'impact de l'intelligence artificielle dans le BTP</strong>.</p>
+          <p>Une séance riche en enseignements, au cours de laquelle nous avons découvert comment l'IA transforme progressivement notre manière de concevoir, de gérer et de réaliser les projets de construction.</p>
+          <p style="margin-top:15px;"><strong>🎯 Thèmes abordés :</strong></p>
+          <ul>
+            <li>Innovation dans le BTP</li>
+            <li>Automatisation des processus</li>
+            <li>Optimisation des projets</li>
+            <li>L'IA au service de la construction</li>
+          </ul>
+          <p style="margin-top:20px;">👉 Entre innovation, automatisation et optimisation, une chose est claire : <strong>l'ingénierie évolue, et nous devons évoluer avec elle.</strong></p>
+          <p style="margin-top:15px;">Un grand merci à tous les participants pour leur présence et leur engagement 👏</p>
+          <p style="margin-top:20px; font-style:italic; color:#F2A900; font-weight:600;">« Chez APEXIS, chaque rencontre est une étape de plus vers l'excellence. »</p>
+          <p style="margin-top:25px; text-align:center; color:#888; font-size:0.9rem;">
+            #APEXIS #IA #BTP #Engineering #Innovation
+          </p>`
+      }
+,
+      expo3: {
+        photos: ['expo3-affiche.jpg', 'expo3-presentation-1.jpg', 'expo3-presentation-2.jpg'],
+        html: `<h2>🏗️ Expo 3 — La construction préfabriquée</h2>
+          <p><strong>📅 Date :</strong> Samedi 11 Avril 2026</p>
+          <p><strong>🕙 Heure :</strong> 12H00 à 13H30</p>
+          <p><strong>📍 Lieu :</strong> Salle CLAC Bandalungwa, Kinshasa</p>
+          <p><strong>🎤 Intervention :</strong> Exaucée Eshimu, étudiant en architecture (ISAU)</p>
+          <p><strong>📝 Description :</strong></p>
+          <p>Ce samedi comme d'habitude, nous avons partagé sur un sujet innovant et passionnant du BTP : <strong>la construction préfabriquée</strong>. Avec l'évolution incroyable et l'innovation du chantier, le monde assiste depuis quelques années déjà aux constructions préfabriquées des infrastructures au profit de l'humanité.</p>
+          <p style="margin-top:15px; font-weight:600;">🏗️ La construction préfabriquée : construire autrement</p>
+          <p>La construction préfabriquée consiste à fabriquer les éléments d'un bâtiment en usine, puis à les assembler sur le chantier.</p>
+          <p style="margin-top:15px;"><strong>👉 Exemples :</strong></p>
+          <ul>
+            <li>Murs</li>
+            <li>Poutres</li>
+            <li>Dalles</li>
+          </ul>
+          <p style="margin-top:15px;"><strong>🔎 Quels sont les avantages ?</strong></p>
+          <ul>
+            <li>✔️ Gain de temps</li>
+            <li>✔️ Meilleure qualité (fabrication contrôlée)</li>
+            <li>✔️ Réduction des coûts</li>
+            <li>✔️ Moins de déchets sur chantier</li>
+          </ul>
+          <p style="margin-top:15px;"><strong>⚠️ Quelques limites :</strong></p>
+          <ul>
+            <li>Transport des éléments</li>
+            <li>Besoin de précision lors de l'assemblage</li>
+          </ul>
+          <p style="margin-top:20px;">💡 Aujourd'hui, la préfabrication représente une solution moderne pour construire plus rapidement et efficacement.</p>
+          <p style="margin-top:20px; font-style:italic; color:#F2A900; font-weight:600;">« Chez APEXIS, nous nous intéressons aux méthodes qui construisent le futur. »</p>
+          <p style="margin-top:25px; text-align:center; color:#888; font-size:0.9rem;">
+            #APEXIS #BTP #Construction #Innovation #Engineering
+          </p>`
+      }
+,
+      expo4: {
+        photos: ['expo4-affiche.jpg'],
+        html: `<h2>🏗️ Expo 4 — Les matériaux de construction</h2>
+          <p><strong>📅 Date :</strong> Samedi 18 Avril 2026</p>
+          <p><strong>🕙 Heure :</strong> 12H00</p>
+          <p><strong>📍 Lieu :</strong> Salle CLAC Bandalungwa (Maison Communale), Kinshasa</p>
+          <p><strong>🎤 Intervention :</strong> Persie Kumbi</p>
+          <p><strong>📝 Description :</strong></p>
+          <p>Ce samedi, nous aborderons un thème essentiel dans le domaine du BTP : les matériaux de construction. Comprendre les matériaux, c'est comprendre la base de toute structure.</p>
+          <p style="margin-top:15px;"><strong>🎯 Au programme :</strong></p>
+          <ul>
+            <li>Les différents types de matériaux</li>
+            <li>Leurs propriétés</li>
+            <li>Leur rôle dans la construction</li>
+          </ul>
+          <p style="margin-top:20px; font-style:italic; color:#F2A900; font-weight:600;">« Rejoignez-nous pour apprendre, partager et évoluer ensemble. »</p>
+          <p style="margin-top:25px; text-align:center; color:#888; font-size:0.9rem;">
+            #APEXIS #BTP #Materiaux #Engineering
+          </p>`
+      }
+,
+      visiteRocade: {
+        photos: ['visite-rocade.jpg'],
+        html: `<h2>🚧 Visite à la Rocade de Kinshasa</h2>
+          <p><strong>📅 Date :</strong> Samedi 17 Octobre 2026</p>
+          <p><strong>🕙 Heure :</strong> 10H00</p>
+          <p><strong>📍 Lieu de rassemblement :</strong> Entrée Mikondo, Kinshasa</p>
+          <p><strong>📝 Description :</strong></p>
+          <p>La rocade de Kinshasa, c'est bien plus qu'une route : c'est une infrastructure structurante qui façonne la mobilité, l'économie et l'avenir de notre capitale. 🇨🇩</p>
+          <p>Ce samedi, nous descendons sur le chantier pour voir de près comment s'écrit l'ingénierie qui transforme la ville.</p>
+          <p style="margin-top:20px;"><strong>🎯 Objectifs de la visite :</strong></p>
+          <ul>
+            <li>👁️ <strong>Voir le terrain</strong>, c'est comprendre le projet.</li>
+            <li>👷 <strong>Observer les travaux</strong>, c'est mesurer l'avancée.</li>
+            <li>📈 <strong>Analyser les détails</strong>, c'est anticiper la suite.</li>
+            <li>🎯 <strong>Chaque visite compte</strong> : c'est du concret pour demain.</li>
+          </ul>
+          <p style="margin-top:20px; font-style:italic; color:#F2A900; font-weight:600;">
+            « Futurs ingénieurs et architectes, on ne regarde pas l'avenir de la RDC : on apprend à le bâtir. » 💪🏗️
+          </p>
+          <p style="margin-top:25px; text-align:center; color:#888; font-size:0.9rem;">
+            #APEXIS #BTP #GénieCivil #RDC #RocadeKinshasa
+          </p>`
+      }
+    };
+
+    // ============ LIGHTBOX ============
+    let lightboxImages = [];
+    let lightboxIndex = 0;
+    let currentEventPhotos = [];
+
+    function openLightbox(src, allImages) {
+      if (Array.isArray(allImages) && allImages.length > 0) {
+        lightboxImages = allImages.slice();
+      } else {
+        lightboxImages = [src];
+      }
+      lightboxIndex = lightboxImages.indexOf(src);
+      if (lightboxIndex === -1) lightboxIndex = 0;
+      updateLightbox();
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function updateLightbox() {
+      var img = document.getElementById('lightboxImg');
+      var counter = document.getElementById('lightboxCounter');
+      var prevBtn = document.querySelector('.lightbox .nav-prev');
+      var nextBtn = document.querySelector('.lightbox .nav-next');
+      if (!img) return;
+      img.src = lightboxImages[lightboxIndex];
+      var multi = lightboxImages.length > 1;
+      if (counter) {
+        counter.textContent = (lightboxIndex + 1) + ' / ' + lightboxImages.length;
+        counter.style.display = multi ? 'block' : 'none';
+      }
+      if (prevBtn) prevBtn.style.display = multi ? 'flex' : 'none';
+      if (nextBtn) nextBtn.style.display = multi ? 'flex' : 'none';
+    }
+
+    function lightboxNext(e) {
+      if (e) e.stopPropagation();
+      if (lightboxImages.length <= 1) return;
+      lightboxIndex = (lightboxIndex + 1) % lightboxImages.length;
+      updateLightbox();
+    }
+
+    function lightboxPrev(e) {
+      if (e) e.stopPropagation();
+      if (lightboxImages.length <= 1) return;
+      lightboxIndex = (lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length;
+      updateLightbox();
+    }
+
+    function closeLightbox() {
+      var lb = document.getElementById('lightbox');
+      if (lb) lb.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // ============ MODAL ============
+    function openModal(htmlContent, imgSrc) {
+      document.getElementById('modalBody').innerHTML = htmlContent;
+      var img = document.getElementById('modalImg');
+      if (imgSrc && imgSrc.trim() !== '') {
+        img.src = imgSrc;
+        img.style.display = 'block';
+      } else {
+        img.style.display = 'none';
+      }
+      document.getElementById('modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      var m = document.getElementById('modal');
+      if (m) m.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function openEvent(key) {
+      var event = EVENTS[key];
+      if (!event) return;
+      currentEventPhotos = event.photos || [];
+      var modalImg = document.getElementById('modalImg');
+      var modalBody = document.getElementById('modalBody');
+      var galleryHTML = '';
+      if (event.photos && event.photos.length > 0) {
+        galleryHTML = '<div class="modal-gallery">';
+        event.photos.forEach(function(photo) {
+          galleryHTML += '<img src="' + photo + '" alt="Photo" data-photo="' + photo + '" onclick="openGalleryPhoto(this)">';
+        });
+        galleryHTML += '</div>';
+      }
+      if (modalImg) modalImg.style.display = 'none';
+      modalBody.innerHTML = galleryHTML + event.html;
+      document.getElementById('modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function openGalleryPhoto(el) {
+      var photo = el.getAttribute('data-photo');
+      if (!photo) return;
+      openLightbox(photo, currentEventPhotos);
+    }
+
+    // ============ CLAVIER ============
+    document.addEventListener('keydown', function(e) {
+      var lb = document.getElementById('lightbox');
+      if (lb && lb.classList.contains('active')) {
+        if (e.key === 'ArrowRight') { e.preventDefault(); lightboxNext(); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); lightboxPrev(); }
+        if (e.key === 'Escape') closeLightbox();
+      } else {
+        if (e.key === 'Escape') closeModal();
+      }
+    });
+
+    // ============ SWIPE MOBILE ============
+    var _touchStartX = 0;
+    document.addEventListener('DOMContentLoaded', function() {
+      var lb = document.getElementById('lightbox');
+      if (!lb) return;
+      lb.addEventListener('touchstart', function(e) {
+        _touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+      lb.addEventListener('touchend', function(e) {
+        var dx = e.changedTouches[0].screenX - _touchStartX;
+        if (dx < -50) lightboxNext();
+        if (dx > 50) lightboxPrev();
+      }, { passive: true });
+    });
+
+    // ============ INIT ============
+    window.onload = function() {
+      setLanguage(currentLang);
+      setTheme(currentTheme);
+    };
+  </script>
+
+</body>
+</html>
